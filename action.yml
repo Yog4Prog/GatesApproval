@@ -4,12 +4,30 @@ inputs:
   approvers:
     description: 'Required Approvers'
     required: true
+  owner:
+    description: 'Issue Created By'
+    required: true
+  repo:
+    description: 'Repository Name'
+    required: true
+  timeout: 
+    description: 'Timeout in Minutes'
+    required: true
+    default: '1'
   secret:
     description: 'Secret'
     required: true
-  issue-title:
-    description: The Approval title 
+  issue_title:
+    description: 'The Approval title'
     required: false
+  body_message:
+    description: 'Description for Issue body'
+    required: false
+    default: 'Found a bug need approval to continue'
+  labels: 
+    description: 'Label'
+    required: false
+    default: 'bug'
 runs:
   using: 'node16'
   main: 'index.js'

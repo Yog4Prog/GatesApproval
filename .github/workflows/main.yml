@@ -11,3 +11,9 @@ jobs:
         with:
           approvers: 'Yog4Prog'
           secret: ${{ secrets.AUTH_TOKEN }}
+          owner: 'Yog4Prog'
+          repo: 'GatesApproval'
+          timeout: '2'
+          issue_title: 'A Scan has a fialure.. Please approve to proceed'
+          body_message: 'Found an Issue while performing SCA Scan'
+          labels: 'bug'
