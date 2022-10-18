@@ -5,11 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Create Approval Request 
     steps:
-      - name: Hello world action step
-        id: hello
+      - name: Creating an Issue for Approval
+        id: ApprovalIssue
         uses: Yog4Prog/GatesApproval@v1.1
         with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          approvers: 'Yog4Prog'
+          secret: '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'
