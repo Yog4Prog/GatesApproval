@@ -9,10 +9,10 @@ jobs:
         id: ApprovalIssue
         uses: Yog4Prog/GatesApproval@main
         with:
-          approvers: 'Yog4Prog'
-          secret: ${{ secrets.AUTH_TOKEN }}
           owner: 'Yog4Prog'
           repo: 'GatesApproval'
+          approvers: 'Yog4Prog'
+          secret: ${{ secrets.AUTH_TOKEN }}
           timeout: '2'
           issue_title: 'A Scan has a failure.. Please approve to proceed'
           body_message: 'Found an Issue while performing SCA Scan'
