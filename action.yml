@@ -1,13 +1,15 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Manual Approval Action'
+description: 'Pause a workflow/job and get approval to continue'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  approvers:
+    description: 'Required Approvers'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  secret:
+    description: 'Secret'
+    required: true
+  issue-title:
+    description: The Approval title 
+    required: false
 runs:
   using: 'node16'
   main: 'index.js'
