@@ -14,7 +14,7 @@ const labels = core.getInput('lables')
 
 
 
-var createPayload = JSON.stringify(
+var createIssuePayload = JSON.stringify(
     {
         owner: owner,
         repo: repo,
@@ -30,7 +30,7 @@ var createPayload = JSON.stringify(
 );
 
 
-var requestString = {
+var createIssueRequest = {
     method: 'post',
     url: "https://api.github.com/repos/"+owner+"/" +repo +"/issues",
     headers: {
@@ -38,15 +38,15 @@ var requestString = {
         'Content-Type': 'application/json',
         'Accept': 'application/vnd.github.v3+json'
     },
-    data: createPayload
+    data: createIssuePayload
 };
 
 
-axios(requestString)
+axios(createIssueRequest)
 .then( function(res) {
-    console.log("Issue successfully created !!");
+    console.log("Github Approval Issue successfully created !!");
 })
 .catch( function(error){
-    console.log("Failed to created issue "+ error)
+    console.log("Failed to create an Github Approval Issue."+ error)
 });
    
