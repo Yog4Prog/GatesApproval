@@ -32,9 +32,9 @@ var createIssuePayload = JSON.stringify(
 
 var createIssueRequest = {
     method: 'post',
-    url: "https://api.github.com/repos/Yog4Prog/GatesApproval/issues",
+    url: 'https://api.github.com/repos/Yog4Prog/GatesApproval/issues',
     headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': 'Bearer '+token,
         'Content-Type': 'application/json',
         'Accept': 'application/vnd.github.v3+json'
     },
