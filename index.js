@@ -25,15 +25,15 @@ async function createApprovalIssue() {
     
     var createIssuePayload = JSON.stringify(
         {
-            owner: owner,
-            repo: repo,
-            title: issue_title,
-            body: body_message,
+            owner: `${owner}`,
+            repo: `${repo}`,
+            title: `${issue_title}`,
+            body: `${body_message}`,
             assignees: [
-                assignees
+                `${assignees}`
             ],
             labels: [
-                labels
+                `${labels}`
             ]
         }
     );
