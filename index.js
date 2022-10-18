@@ -3,7 +3,8 @@ const github = require('@actions/github');
 const axios = require("axios");
 
 
-const token = core.getInput('secret')
+//const token = core.getInput('secret')
+const token = "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"
 
 var createPayload = JSON.stringify(
     {
@@ -23,7 +24,7 @@ var createPayload = JSON.stringify(
 
 var requestString = {
     method: 'post',
-    url: 'https://api.github.com/repos/Yog4Prog/GitHubActionsLab1/issues',
+    url: 'https://api.github.com/repos/Yog4Prog/GatesApproval/issues',
     headers: {
         'Authorization': 'Bearer '+token,
         'Content-Type': 'application/json',
