@@ -16,15 +16,15 @@ const labels = core.getInput('lables')
 
 var createIssuePayload = JSON.stringify(
     {
-        owner: owner,
-        repo: repo,
-        title: issue_title,
-        body: body_message,
+        owner: 'Yog4Prog',
+        repo: 'GatesApproval',
+        title: 'A Scan has a failure.. Please approve to proceed',
+        body: 'Found an Issue while performing SCA Scan',
         assignees: [
-            assignees
+            'Yog4Prog'
         ],
         labels: [
-            labels
+            'bug'
         ]
       }
 );
