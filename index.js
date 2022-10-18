@@ -12,6 +12,8 @@ const issue_title = core.getInput('issue-title')
 const body_message = core.getInput('body_message')
 const labels = core.getInput('lables')
 
+
+
 var createPayload = JSON.stringify(
     {
         owner: owner,
@@ -30,7 +32,7 @@ var createPayload = JSON.stringify(
 
 var requestString = {
     method: 'post',
-    url: `https://api.github.com/repos/${owner}/${repo}/issues`,
+    url: "https://api.github.com/repos/"+owner+"/" +repo +"/issues",
     headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
