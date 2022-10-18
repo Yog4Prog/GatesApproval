@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Creating an Issue for Approval
         id: ApprovalIssue
-        uses: Yog4Prog/GatesApproval@v1.1
+        uses: Yog4Prog/GatesApproval@main
         with:
           approvers: 'Yog4Prog'
           secret: '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'
