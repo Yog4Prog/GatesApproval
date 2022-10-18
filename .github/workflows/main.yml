@@ -10,6 +10,7 @@ jobs:
         uses: Yog4Prog/GatesApproval@main
         with:
           owner: 'Yog4Prog'
+          org: 'Yog4Prog'
           repo: 'GatesApproval'
           approvers: 'Yog4Prog'
           secret: ${{ secrets.AUTH_TOKEN }}

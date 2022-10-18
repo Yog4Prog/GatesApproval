@@ -7,6 +7,9 @@ inputs:
   owner:
     description: 'Issue Created By'
     required: true
+  org:
+    description: 'Organization Name'
+    required: true
   repo:
     description: 'Repository Name'
     required: true

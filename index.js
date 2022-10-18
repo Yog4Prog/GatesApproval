@@ -4,6 +4,7 @@ const axios = require("axios");
 
 
 const owner = core.getInput('owner')
+const org = core.getInput('org')
 const repo = core.getInput('repo')
 const assignees = core.getInput('approvers')
 const token = core.getInput('secret')
@@ -14,7 +15,9 @@ const labels = core.getInput('labels')
 
 async function createApprovalIssue() {
 
+    
     console.log(`owner ${owner}`)
+    console.log(`org ${org}`)
     console.log(`repo ${repo}`)
     console.log(`assignees ${assignees}`)
     console.log(`token ${token}`)
@@ -40,7 +43,7 @@ async function createApprovalIssue() {
 
     var createIssueRequest = {
         method: 'post',
-        url: 'https://api.github.com/repos/Yog4Prog/GatesApproval/issues',
+        url: `https://api.github.com/repos/${owner}/${repo}/issues`,
         headers: {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json',
