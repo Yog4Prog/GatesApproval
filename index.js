@@ -3,14 +3,13 @@ const github = require('@actions/github');
 const axios = require("axios");
 
 
-//const token = core.getInput('secret')
-const token = "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"
+const token = core.getInput('secret')
 
 var createPayload = JSON.stringify(
     {
         owner: 'Yog4Prog',
         repo: 'GatesApproval',
-        title: 'Approve an Issue',
+        title: 'Approve an Issue 5',
         body: 'Found a bug need approval to ontinue',
         assignees: [
           'Yog4Prog'

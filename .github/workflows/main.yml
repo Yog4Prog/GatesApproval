@@ -10,4 +10,4 @@ jobs:
         uses: Yog4Prog/GatesApproval@main
         with:
           approvers: 'Yog4Prog'
-          secret: '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'
+          secret: ${{ secrets.AUTH_TOKEN }}
