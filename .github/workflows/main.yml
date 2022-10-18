@@ -15,7 +15,7 @@ jobs:
           repo: 'GatesApproval'
           approvers: 'Yog4Prog'
           secret: ${{ secrets.AUTH_TOKEN }}
-          timeout: '2'
+          timeout: '1'
           issue_title: 'A Scan has a failure.. Please approve to proceed'
           body_message: 'Found an Issue while performing SCA Scan'
           labels: 'bug'
