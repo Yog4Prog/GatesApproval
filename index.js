@@ -8,9 +8,9 @@ const repo = core.getInput('repo')
 const assignees = core.getInput('approvers')
 const token = core.getInput('secret')
 const timeout = core.getInput('timeout')
-const issue_title = core.getInput('issue-title')
+const issue_title = core.getInput('issue_title')
 const body_message = core.getInput('body_message')
-const labels = core.getInput('lables')
+const labels = core.getInput('labels')
 
 async function createApprovalIssue() {
 
@@ -25,15 +25,15 @@ async function createApprovalIssue() {
     
     var createIssuePayload = JSON.stringify(
         {
-            owner: 'Yog4Prog',
-            repo: 'GatesApproval',
-            title: 'A Scan has a failure.. Please approve to proceed',
-            body: 'Found an Issue while performing SCA Scan',
+            owner: owner,
+            repo: repo,
+            title: issue_title,
+            body: body_message,
             assignees: [
-                'Yog4Prog'
+                assignees
             ],
             labels: [
-                'bug'
+                labels
             ]
         }
     );
