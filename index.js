@@ -7,7 +7,7 @@ const octokit = new Octokit({
 
 try {
 
-  await octokit.request('POST /repos/Yog4Prog/GatesApproval/issues', {
+  octokit.request('POST /repos/Yog4Prog/GatesApproval/issues', {
     owner: 'Yog4Prog',
     repo: 'GatesApproval',
     title: 'Approve an Issue',
