@@ -55,10 +55,15 @@ function updateApprovalIssue() {
     console.log("Inside Update Issue")
 }
 
-await createApprovalIssue()
-const timeTrigger = setInterval(updateApprovalIssue, 10000);
+function main()
+{
+ createApprovalIssue()
+ const timeTrigger = setInterval(updateApprovalIssue, 10000);
 
-setTimeout(function () {
+ setTimeout(function () {
     clearInterval(timeTrigger);
-}, timeout * 60 * 1000)
+ }, timeout * 60 * 1000)
+}
+
+main()
 
