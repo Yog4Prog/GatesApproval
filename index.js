@@ -15,17 +15,6 @@ const labels = core.getInput('labels')
 
 async function createApprovalIssue() {
 
-    
-    console.log(`owner ${owner}`)
-    console.log(`org ${org}`)
-    console.log(`repo ${repo}`)
-    console.log(`assignees ${assignees}`)
-    console.log(`token ${token}`)
-    console.log(`timeout ${timeout}`)
-    console.log(`issue_title ${issue_title}`)
-    console.log(`body_message ${body_message}`)
-    console.log(`labels ${labels}`)
-    
     var createIssuePayload = JSON.stringify(
         {
             owner: `${owner}`,
@@ -43,7 +32,7 @@ async function createApprovalIssue() {
 
     var createIssueRequest = {
         method: 'post',
-        url: `https://api.github.com/repos/${owner}/${repo}/issues`,
+        url: `https://api.github.com/repos/${org}/${repo}/issues`,
         headers: {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json',
@@ -62,5 +51,14 @@ async function createApprovalIssue() {
         });
 }
 
+function updateApprovalIssue() {
+    console.log("Inside Update Issue")
+}
 
-createApprovalIssue()
+await createApprovalIssue()
+const timeTrigger = setInterval(updateApprovalIssue, 10000);
+
+setTimeout(function () {
+    clearInterval(timeTrigger);
+}, timeout * 60 * 1000)
+
