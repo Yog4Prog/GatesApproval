@@ -13,7 +13,24 @@ const issue_title = core.getInput('issue_title')
 const body_message = core.getInput('body_message')
 const labels = core.getInput('labels')
 
+
+var approvalContext = {};
+var approvedWords = ["approved", "approve", "lgtm", "yes", "proceed"]
+var deniedWords = ["denied", "deny", "reject", "rejected", "no"]
+var timeTrigger = 0;
+
 async function createApprovalIssue() {
+
+    approvalContext.owner = `${owner}`;
+    approvalContext.owner = `${repo}`;
+    approvalContext.title = `${issue_title}`;
+    approvalContext.body = `${body_message}`;
+    approvalContext.assignees = `${assignees}`;
+    approvalContext.labels = `${labels}`;
+    approvalContext.runID = '';
+    approvalContext.issueNumber = '';
+    approvalContext.status = '';
+    approvalContext.closedComments = '';
 
     var createIssuePayload = JSON.stringify(
         {
@@ -42,27 +59,93 @@ async function createApprovalIssue() {
     };
 
 
-    await axios(createIssueRequest)
-        .then(function (res) {
+    var resp = await axios(createIssueRequest)
+        .then(res => {
             console.log("Github Approval Issue successfully created !!");
+            approvalContext.issueNumber = res.data.number;
+            approvalContext.status = res.data.state;
         })
-        .catch(function (error) {
+        .catch(error => {
             console.log("Failed to create an Github Approval Issue." + error)
+        });
+
+}
+
+async function updateApprovalIssueOnComments() {
+    var commentListRequest = {
+        method: 'GET',
+        url: `https://api.github.com/repos/${org}/${repo}/issues/${approvalContext.issueNumber}/comments`,
+        headers: {
+            'Authorization': `Bearer  ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+        },
+    };
+
+    var resp = await axios(commentListRequest)
+        .then(async res => {
+            console.log("Comments Response !!");
+            if (res.data.length > 0) {
+                if (approvedWords.includes(res.data[res.data.length - 1].body.toLowerCase())) {
+                    console.log(`${assignees} Approved to proceed.`);
+                    await closeIssue();
+                }
+                else if (deniedWords.includes(res.data[res.data.length - 1].body.toLowerCase())) {
+                    console.log(`${assignees} Denied to proceed.`)
+                    // Fail the build..
+                    await closeIssue();
+                }
+                else {
+                    console.log("No matching comments provided.. for Approve or Deny")
+                }
+
+            }
+            else {
+                console.log("No comments yet..");
+            }
+        })
+        .catch(error => {
+            console.log("Error Occured.." + error)
         });
 }
 
-function updateApprovalIssue() {
-    console.log("Inside Update Issue")
+async function closeIssue() {
+    var closeIssuePayload = JSON.stringify(
+        {
+            owner: `${owner}`,
+            repo: `${repo}`,
+            state: 'closed'
+        }
+    );
+
+    var closeIssueRequest = {
+        method: 'PATCH',
+        url: `https://api.github.com/repos/${org}/${repo}/issues/${approvalContext.issueNumber}`,
+        headers: {
+            'Authorization': `Bearer  ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+        },
+        data: closeIssuePayload
+    }
+
+    var closeResp = await axios(closeIssueRequest).then(cresp => {
+        console.log("comment should be closed!!")
+        clearInterval(timeTrigger);
+        timeTrigger = false;
+    }).catch(cerror => {
+        console.log("Exception occured " + cerror)
+    })
 }
 
-function main()
-{
- createApprovalIssue()
- const timeTrigger = setInterval(updateApprovalIssue, 10000);
-
- setTimeout(function () {
-    clearInterval(timeTrigger);
- }, timeout * 60 * 1000)
+async function main() {
+    await createApprovalIssue();
+    timeTrigger = setInterval(updateApprovalIssueOnComments, 5000);
+    if (timeTrigger) {
+        setTimeout(async function () {
+            await closeIssue()
+        }, timeout * 60 * 1000)
+    }
 }
 
 main()

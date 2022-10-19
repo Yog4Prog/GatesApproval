@@ -14,12 +14,23 @@ jobs:
         run: echo "Code compilation completed."  
       - name: Run Unit Test
         run: echo "Unit Test execution completed"
-      - name: Sonar Inspect
-        run: echo "Sonar Inspect completed"
-  
-  create_approval_issue:
+  ScanCode:
     runs-on: ubuntu-latest
     needs: Build
+    name: Quality Check ScanCode
+    steps:
+      - name: Sonar Inspect
+        run: echo "Sonar Inspect completed"
+  QualityGate:
+    runs-on: ubuntu-latest
+    needs: ScanCode
+    name: Quality Gate A
+    steps:
+      - name: Gate(A) Check
+        run: echo "Quality Check Gate(A) completed.."
+  create_approval_issue:
+    runs-on: ubuntu-latest
+    needs: QualityGate
     name: Create Approval Request 
     steps:
       - name: Creating an Issue for Approval
