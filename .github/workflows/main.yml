@@ -1,9 +1,25 @@
 name: Manual Approval Workflow
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
+  
+  Build:
+    runs-on: ubuntu-latest
+    name: CI
+    steps:
+      - name: Checkout Code
+        id: Checkout
+        uses: actions/checkout@v2.5.0
+      - name: Compile Code
+        run: echo "Code compilation completed."  
+      - name: Run Unit Test
+        run: echo "Unit Test execution completed"
+      - name: Sonar Inspect
+        run: echo "Sonar Inspect completed"
+  
   create_approval_issue:
     runs-on: ubuntu-latest
+    needs: Build
     name: Create Approval Request 
     steps:
       - name: Creating an Issue for Approval
