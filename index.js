@@ -85,7 +85,6 @@ async function updateApprovalIssueOnComments() {
 
     var resp = await axios(commentListRequest)
         .then(async res => {
-            console.log("Comments Response !!");
             if (res.data.length > 0) {
                 if (approvedWords.includes(res.data[res.data.length - 1].body.toLowerCase())) {
                     console.log(`${assignees} Approved to proceed.`);
@@ -102,7 +101,7 @@ async function updateApprovalIssueOnComments() {
 
             }
             else {
-                console.log("No comments yet..");
+                console.log("Pending approval, awaiting ..");
             }
         })
         .catch(error => {
@@ -131,7 +130,7 @@ async function closeIssue() {
     }
 
     var closeResp = await axios(closeIssueRequest).then(cresp => {
-        console.log("comment should be closed!!")
+        console.log("Approval Request Closed!!")
         clearInterval(timeTrigger);
         clearTimeout(timeDurationCheck);
         timeTrigger = false;
@@ -144,6 +143,7 @@ async function main() {
     await createApprovalIssue();
     timeTrigger = setInterval(updateApprovalIssueOnComments, 5000);
     timeDurationCheck =  setTimeout(async function () {
+            console.log("Approval waiting period elapsed. Approval request will be automatically closed and workflow status will be marked to Failed.")
             await closeIssue()
         }, timeout * 60 * 1000)
    
