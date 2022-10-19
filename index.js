@@ -18,6 +18,7 @@ var approvalContext = {};
 var approvedWords = ["approved", "approve", "lgtm", "yes", "proceed"]
 var deniedWords = ["denied", "deny", "reject", "rejected", "no"]
 var timeTrigger = 0;
+var timeDurationCheck = 0;
 
 async function createApprovalIssue() {
 
@@ -132,6 +133,7 @@ async function closeIssue() {
     var closeResp = await axios(closeIssueRequest).then(cresp => {
         console.log("comment should be closed!!")
         clearInterval(timeTrigger);
+        clearTimeout(timeDurationCheck);
         timeTrigger = false;
     }).catch(cerror => {
         console.log("Exception occured " + cerror)
@@ -141,11 +143,10 @@ async function closeIssue() {
 async function main() {
     await createApprovalIssue();
     timeTrigger = setInterval(updateApprovalIssueOnComments, 5000);
-    if (timeTrigger) {
-        setTimeout(async function () {
+    timeDurationCheck =  setTimeout(async function () {
             await closeIssue()
         }, timeout * 60 * 1000)
-    }
+   
 }
 
 main()
