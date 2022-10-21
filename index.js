@@ -13,7 +13,6 @@ const issue_title = core.getInput('issue_title')
 const body_message = core.getInput('body_message')
 const labels = core.getInput('labels')
 
-
 var approvalContext = {};
 var approvedWords = ["approved", "approve", "lgtm", "yes", "proceed"]
 var deniedWords = ["denied", "deny", "reject", "rejected", "no"]
