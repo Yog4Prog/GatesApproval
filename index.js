@@ -2,7 +2,6 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const axios = require("axios");
 
-
 const owner = core.getInput('owner')
 const org = core.getInput('org')
 const repo = core.getInput('repo')
