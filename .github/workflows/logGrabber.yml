@@ -1,5 +1,6 @@
 name: LogGrabber
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: [ApprovalWorkflow]
     types:
@@ -10,6 +11,10 @@ jobs:
     name: Download Logs
     steps:
       - name: Fetch Payload
-        run: echo "Trying to fetch payload... from ${context.payload}"
+      - uses: actions/github-script@v6
+        with:
+          script: |
+           const payload = context.payload
+           console.log(payload)
        
  
