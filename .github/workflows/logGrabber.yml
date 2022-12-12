@@ -1,0 +1,15 @@
+name: LogGrabber
+on:
+  workflow_run:
+    workflows: [ApprovalWorkflow]
+    types:
+      - completed
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    name: Download Logs
+    steps:
+      - name: Fetch Payload
+        run: echo "Trying to fetch payload... from ${context.payload}"
+       
+ 
