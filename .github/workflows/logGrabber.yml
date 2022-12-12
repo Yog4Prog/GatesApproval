@@ -2,8 +2,9 @@ name: LogGrabber
 on:
   workflow_run:
     workflows: [SampleWorkflow]
-    types:
-      - completed
+    types: [completed]
+    branches: [main]
+    
 jobs:
   download:
     runs-on: ubuntu-latest
