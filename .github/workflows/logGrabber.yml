@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Payload
-      - uses: actions/github-script@v6
+        uses: actions/github-script@v6
         with:
           script: |
            const payload = context.payload
