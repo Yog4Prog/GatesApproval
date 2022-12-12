@@ -1,0 +1,17 @@
+name: SampleWorkflow
+on: [push, workflow_dispatch]
+
+jobs:
+  ScanCode:
+    runs-on: ubuntu-latest
+    name: Quality Check ScanCode
+    steps:
+      - name: Sonar Inspect
+        run: echo "Sonar Inspect completed"
+  QualityGate:
+    runs-on: ubuntu-latest
+    name: Quality Gate A
+    steps:
+      - name: Gate(A) Check
+        run: echo "Quality Check Gate(A) completed.."
+  
