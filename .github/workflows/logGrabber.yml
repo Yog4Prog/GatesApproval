@@ -8,7 +8,6 @@ on:
 jobs:
   download:
     runs-on: ubuntu-latest
-    name: Download Logs
     steps:
       - name: Fetch Payload
       - uses: actions/github-script@v6
