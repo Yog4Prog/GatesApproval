@@ -1,4 +1,4 @@
-name: Manual Approval Workflow
+name: ApprovalWorkflow
 on: [push, workflow_dispatch]
 
 jobs:
@@ -34,15 +34,4 @@ jobs:
     name: Create Approval Request 
     steps:
       - name: Creating an Issue for Approval
-        id: ApprovalIssue
-        uses: Yog4Prog/GatesApproval@main
-        with:
-          owner: 'Yog4Prog'
-          org: 'Yog4Prog'
-          repo: 'GatesApproval'
-          approvers: 'Yog4Prog'
-          secret: ${{ secrets.AUTH_TOKEN }}
-          timeout: '1'
-          issue_title: 'A Scan has a failure.. Please approve to proceed'
-          body_message: 'Found an Issue while performing SCA Scan'
-          labels: 'ScanFailure'
+        run: echo "Creting an Issue for Approval"
