@@ -1,5 +1,6 @@
 name: LogGrabber
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: [ApprovalWorkflow]
     types:
