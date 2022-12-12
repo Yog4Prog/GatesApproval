@@ -15,5 +15,7 @@ jobs:
           script: |
            const payload = context.payload
            console.log(payload)
+           console.log("Printing Workflow_run")
+           console.log(payload.workflow_run)
        
  
