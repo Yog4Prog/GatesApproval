@@ -22,11 +22,11 @@ jobs:
         with:
           org: 'Yog4Prog'
           repo: 'GatesApproval'
-          runId: ${{ context.payload.workflow_run.id }}
-          workflowName: ${{ context.payload.workflow_run.name }}
-          workflowPath: ${{ context.payload.workflow_run.path }}
-          headBranch: ${{ context.payload.workflow_run.head_branch }}
-          conclusion: ${{ context.payload.workflow_run.conclusion }}
+          runId: context.payload.workflow_run.id
+          workflowName: context.payload.workflow_run.name
+          workflowPath: context.payload.workflow_run.path
+          headBranch: context.payload.workflow_run.head_branch
+          conclusion: context.payload.workflow_run.conclusion
           gitToken: ${{ secrets.GIT_AUTH_TOKEN}}
           splunkUrl: 'https://localhost:8088'
           splunkHEC: ${{ secrets.SPLUNK_HEC_TOKEN }}
