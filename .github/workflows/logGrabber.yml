@@ -14,10 +14,9 @@ jobs:
         with:
           script: |
            const payload = context.payload
-           console.log(payload)
            console.log("Printing Workflow_run")
            console.log(payload.workflow_run)
-      - name: Fetch Payload
+      - name: Ingest Log To Splunk
         uses: Yog4Prog/log-ingest-splunk-action@main
         with:
           org: 'Yog4Prog'
