@@ -19,13 +19,12 @@ jobs:
       - name: Ingest Log To Splunk
         uses: Yog4Prog/log-ingest-splunk-action@main
         with:
-          org: 'Yog4Prog'
-          repo: 'GatesApproval'
+          repo: ${{ github.repository }}
           runId: ${{ github.event.workflow_run.id }}
           workflowName: ${{ github.event.workflow_run.name }}
-          workflowPath: context.payload.workflow_run.path
-          headBranch: context.payload.workflow_run.head_branch
-          conclusion: context.payload.workflow_run.conclusion
+          workflowPath: ${{ github.event.workflow_run.path }}
+          headBranch: ${{ github.event.workflow_run.head_branch }}
+          conclusion: ${{ github.event.workflow_run.conclusion }}
           gitToken: ${{ secrets.GIT_AUTH_TOKEN}}
           splunkUrl: 'https://localhost:8088'
           splunkHEC: ${{ secrets.SPLUNK_HEC_TOKEN }}
