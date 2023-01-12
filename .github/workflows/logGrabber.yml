@@ -1,7 +1,7 @@
 name: LogGrabber
 on:
   workflow_run:
-    workflows: [SampleWorkflow]
+    workflows: [SampleWorkflow, Manual Approval Workflow]
     types: [completed]
     branches: [main]
     
