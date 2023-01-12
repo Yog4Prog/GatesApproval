@@ -21,8 +21,8 @@ jobs:
         with:
           org: 'Yog4Prog'
           repo: 'GatesApproval'
-          runId: context.payload.workflow_run.id
-          workflowName: context.payload.workflow_run.name
+          runId: ${{ github.context.payload.workflow_run.id }}
+          workflowName: ${{ github.context.payload.workflow_run.name }}
           workflowPath: context.payload.workflow_run.path
           headBranch: context.payload.workflow_run.head_branch
           conclusion: context.payload.workflow_run.conclusion
